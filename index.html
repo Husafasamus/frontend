@@ -5,23 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 
     <div ng-app="blog-angular" ng-controller="baseController">
         
-      
+        
+        
+          <ul class="list-inline">
+            <li ng-repeat="blog in blogs" class="list-inline-item blog-item"> 
+
+            
+                
+            </li>
+            
+         </ul>
+
+
+         <div class="container-fluid">
+            <div ng-repeat="row in blogs" class="row">
+                <div ng-repeat="blog in row" class="col" style="background-color:lavender;">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+          </div>
         
 
-
-
-
-
-
-
+         
+        
+        
     </div>
 
     <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
