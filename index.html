@@ -6,9 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="icon" href="demo_icon.gif" type="image/gif" sizes="16x16">
 </head>
 <body>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
 
     <div ng-app="blog-angular" ng-controller="baseController">
         
@@ -25,19 +29,56 @@
 
 
          <div class="container-fluid">
-            <div ng-repeat="row in blogs" class="row">
-                <div ng-repeat="blog in row" class="col" style="background-color:lavender;">
+                <div ng-repeat="blog in blogs track by $index" class="col">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">
+                        <div ng-if="$index !== editingBlogIndex" class="card-body">
+                          <h5 class="card-title">{{blog.title}}</h5>
+                          <p class="card-text">{{blog.text}}</p>
+                          <a  class="btn btn-primary">pozri</a>
+                          <a ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
+                          <a ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
+                        </div>
+
+                        <div ng-if="$index === editingBlogIndex" class="card-body">
+                            <form>
+                                <h5 class="card-title">
+                                    <input type="text" ng-model="editingBlog.title">
+                                </h5>                          
+                                <p class="card-text">
+                                    <input type="text" ng-model="editingBlog.text">
+                                </p>                               
+                                <a ng-click="editBlog($index)" class="btn btn-primary">Potvrd</a>
+                                <a ng-click="cancelEditingBlog()" class="btn btn-primary">Zrus</a>
+                            </form>                         
+                        </div>
+                    </div>
+
+                      
+
+                </div>
+
+                <a ng-click="startAddingBlog()" ng-if="!addingBlog" class="btn btn-primary add">Pridaj</a>
+                <div class="col" ng-if="addingBlog">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">                       
                         <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <form>
+                                <h5 class="card-title">
+                                    <input type="text" ng-model="newBlog.title">
+                                </h5>                          
+                                <p class="card-text">
+                                    <input type="text" ng-model="newBlog.text">
+                                </p>                               
+                                <a ng-click="addBlog()" class="btn btn-primary">Pridaj</a>
+                                <a ng-click="cancelAddingBlog()" class="btn btn-primary">Zrus</a>
+                            </form>                         
                         </div>
                       </div>
                 </div>
+
             </div>
-          </div>
+
         
 
          
@@ -45,9 +86,7 @@
         
     </div>
 
-    <script src="./node_modules/angular/angular.min.js"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+
 </body>
 </html>
 
