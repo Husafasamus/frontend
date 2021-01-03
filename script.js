@@ -1,9 +1,11 @@
 //const angular = require("angular");
 
-var app = angular.module("blog-angular", []);
+var app = angular.module("blog-angular", ["ngRoute"]);
 var controller = app.controller("baseController", ($scope, $http, $timeout)=>{
 
     $scope.blogs = []; 
+    //
+
 
     $scope.addingBlog = false;
     $scope.editingBlogIndex = -1;
@@ -85,7 +87,40 @@ var controller = app.controller("baseController", ($scope, $http, $timeout)=>{
         $scope.editingBlog.text = "";
     };
 
+    //gallery
+
+    $scope.gallery = [
+        {
+            title: "dog",
+            src: "/gallery/dog.jpg",
+            text: "asdfasf"
+        },
+        {
+            title: "cat",
+            src: "./gallery/cat.jpg",
+            text: "keket"
+        },
+
+
+
+    ]; 
+
+    $scope.sliderPrev = () => {
+        $('.carousel').carousel('prev');
+    };
     
+    $scope.sliderNext = () => {
+        $('.carousel').carousel('next');
+    };
+ 
 
     
+});
+
+app.config(($routeProvider) => {
+    $routeProvider.when("/blogy", {templateUrl: "/blogy.html"})
+                  .when("/home", {templateUrl: "/home.html"})
+                  .when("/gallery", {templateUrl: "/gallery.html"})
+                  
+                  .otherwise({redirectTo: "/"});
 });

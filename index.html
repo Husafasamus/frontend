@@ -9,76 +9,47 @@
     <link rel="icon" href="demo_icon.gif" type="image/gif" sizes="16x16">
 </head>
 <body>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/angular-route/angular-route.min.js"></script> <!---->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
-
+    
 
     <div ng-app="blog-angular" ng-controller="baseController">
         
-        
-        
-          <ul class="list-inline">
-            <li ng-repeat="blog in blogs" class="list-inline-item blog-item"> 
-
-            
-                
-            </li>
-            
-         </ul>
-
-
-         <div class="container-fluid">
-                <div ng-repeat="blog in blogs track by $index" class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">
-                        <div ng-if="$index !== editingBlogIndex" class="card-body">
-                          <h5 class="card-title">{{blog.title}}</h5>
-                          <p class="card-text">{{blog.text}}</p>
-                          <a  class="btn btn-primary">pozri</a>
-                          <a ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
-                          <a ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
-                        </div>
-
-                        <div ng-if="$index === editingBlogIndex" class="card-body">
-                            <form>
-                                <h5 class="card-title">
-                                    <input type="text" ng-model="editingBlog.title">
-                                </h5>                          
-                                <p class="card-text">
-                                    <input type="text" ng-model="editingBlog.text">
-                                </p>                               
-                                <a ng-click="editBlog($index)" class="btn btn-primary">Potvrd</a>
-                                <a ng-click="cancelEditingBlog()" class="btn btn-primary">Zrus</a>
-                            </form>                         
-                        </div>
-                    </div>
-
-                      
-
-                </div>
-
-                <a ng-click="startAddingBlog()" ng-if="!addingBlog" class="btn btn-primary add">Pridaj</a>
-                <div class="col" ng-if="addingBlog">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">                       
-                        <div class="card-body">
-                            <form>
-                                <h5 class="card-title">
-                                    <input type="text" ng-model="newBlog.title">
-                                </h5>                          
-                                <p class="card-text">
-                                    <input type="text" ng-model="newBlog.text">
-                                </p>                               
-                                <a ng-click="addBlog()" class="btn btn-primary">Pridaj</a>
-                                <a ng-click="cancelAddingBlog()" class="btn btn-primary">Zrus</a>
-                            </form>                         
-                        </div>
-                      </div>
-                </div>
-
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#/!">Navbar</a>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#!home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!blogy">Blogy</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!gallery">Gallery</a>
+                </li>
+              </ul>
             </div>
+          </nav>
 
+
+
+
+          <ng-view>
+
+
+          </ng-view>
+
+        
+          
+        
         
 
          
