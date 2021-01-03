@@ -5,7 +5,7 @@
             <div ng-if="$index !== editingBlogIndex" class="card-body">
               <h5 class="card-title">{{blog.title}}</h5>
               <p class="card-text">{{blog.text}}</p>
-              <a  class="btn btn-primary">pozri</a>
+              <a  ng-click="openBlog($index)" class="btn btn-primary">pozri</a>
               <a ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
               <a ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
             </div>

@@ -1,10 +1,10 @@
 //const angular = require("angular");
 
 var app = angular.module("blog-angular", ["ngRoute"]);
-var controller = app.controller("baseController", ($scope, $http, $timeout)=>{
+var controller = app.controller("baseController", ($scope, $http, $timeout, $location)=>{
 
     $scope.blogs = []; 
-    //
+    $scope.blogWhole = {};
 
 
     $scope.addingBlog = false;
@@ -31,6 +31,18 @@ var controller = app.controller("baseController", ($scope, $http, $timeout)=>{
         $scope.loadBlogs();
     }, 0);
 
+    $scope.openBlog = (index) => {     
+        $http.get(`/api/blogWhole/${$scope.blogs[index].id}`).then((response) => {
+            $scope.blogWhole = 
+            {
+                id: $scope.blogs[index].id,
+                title: $scope.blogs[index].title,
+                text: $scope.blogs[index].text,
+                textWhole: response.data.text
+            };
+        });   
+        $location.path("/blog");
+    };
     
    
     //DELETE////////////////////////////////////////////////////////////////////
@@ -121,6 +133,7 @@ app.config(($routeProvider) => {
     $routeProvider.when("/blogy", {templateUrl: "/blogy.html"})
                   .when("/home", {templateUrl: "/home.html"})
                   .when("/gallery", {templateUrl: "/gallery.html"})
+                  .when("/blog", {templateUrl: "/blog.html"})
                   
                   .otherwise({redirectTo: "/"});
 });
