@@ -7,7 +7,7 @@
       <li ng-repeat="picture in gallery track by $index" data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" ng-class="{active: $index === 0}"></li>
     </ol>
     <div class="carousel-inner">
-      <div  ng-repeat="picture in gallery track by $index" class="carousel-item" ng-class="{active: $index === 0}">          
+      <div  ng-repeat="picture in gallery track by $index" class="carousel-item" ng-class="{active: $index === 0}" >          
         <img class="d-block w-100" ng-src="{{picture.src}}" ng-alt="{{picture.title}}">
         <div class="carousel-caption d-none d-md-block">
             <h5>{{picture.text}}</h5>
@@ -23,4 +23,48 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+
+  <!--Grid row-->
+  <div class="row">
+
+    <!--Grid column-->
+    <div ng-repeat="picture in gallery track by $index"  class="col-lg-4 col-md-12 mb-4">
+
+      <img ng-src="{{picture.src}}" ng-click="activeMainImage($index)" class="img-fluid mb-4" style="cursor: pointer;" alt="">
+
+
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <!-- <div class="col-lg-4 col-md-6 mb-4">
+
+      <img src="http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(74).jpg" class="img-fluid mb-4" alt=""
+        data-wow-delay="0.1s">
+
+      <img src="http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(64).jpg" class="img-fluid mb-4" alt=""
+        data-wow-delay="0.4s">
+
+    </div>
+    
+    <div class="col-lg-4 col-md-6 mb-4">
+
+      <img src="http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(77).jpg" class="img-fluid mb-4" alt=""
+        data-wow-delay="0.2s">
+
+      <img src="http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(67).jpg" class="img-fluid mb-4" alt=""
+        data-wow-delay="0.5s">
+
+    </div>
+   
+
+  </div> -->
+  <!--Grid row-->
+
+  <p>{{activatedImageIndex}}</p>
+  <button ng-click="activeMainImage(2)">
+    send
+  </button>
+
+
 </div>

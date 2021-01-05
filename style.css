@@ -20,7 +20,9 @@
 
 }
 
-/* .slider {
+.slider {
     width: 50%;
     height:50%;
-} */
+    padding-left: 30%; /* odstranit neskor */
+    
+} 

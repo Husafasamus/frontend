@@ -112,7 +112,36 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
             src: "./gallery/cat.jpg",
             text: "keket"
         },
-
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(58).jpg",
+            text: "keket"
+        },
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(66).jpg",
+            text: "keket"
+        },
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(74).jpg",
+            text: "keket"
+        },
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(64).jpg",
+            text: "keket"
+        },
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(77).jpg",
+            text: "keket"
+        },
+        {
+            title: "cat",
+            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(67).jpg",
+            text: "keket"
+        },
 
 
     ]; 
@@ -124,7 +153,12 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
     $scope.sliderNext = () => {
         $('.carousel').carousel('next');
     };
- 
+    
+    $scope.activatedImageIndex = 1;
+    $scope.activeMainImage = (index) => {
+        console.log("neviem");
+        $scope.activatedImageIndex = index;
+    };
 
     
 });
