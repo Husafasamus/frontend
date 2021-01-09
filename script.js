@@ -4,7 +4,7 @@ var app = angular.module("blog-angular", ["ngRoute"]);
 var controller = app.controller("baseController", ($scope, $http, $timeout, $location)=>{
 
     $scope.blogs = []; 
-    $scope.blogWhole = {};
+    
 
 
     $scope.addingBlog = false;
@@ -20,6 +20,59 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
         title: "",
         text: ""
     };
+
+    
+
+    $scope.adminCredentials = {
+        login: "admin",
+        password: "1234"
+    };
+
+    $scope.logUser = {
+        login: "",
+        password: ""
+    };
+
+    $scope.whoIsLogged = {
+        login: "admin",
+        type: "admin" // admin, basic
+    };
+
+
+    $scope.loginUser = () => { 
+
+        $scope.whoIsLogged.login = $scope.logUser.login;
+        $scope.whoIsLogged.type = "basic";
+
+        if ($scope.logUser.login === $scope.adminCredentials.login && 
+            $scope.logUser.password === $scope.adminCredentials.password) {
+            $scope.whoIsLogged.login = $scope.logUser.login;
+            $scope.whoIsLogged.type = "admin";
+        }
+     
+        $scope.logUser = {
+            login: "",
+            password: ""
+        };
+
+
+        console.log($scope.whoIsLogged);
+        // console.log($scope.logUser);
+        // $http.post(`/api/loginUser/`, $scope.logUser).then((response) => {
+        //     $scope.logUser = {
+        //         login: "",
+        //         password: ""
+        //     };
+        // }); 
+    };
+
+    $scope.logoutUser = () => { 
+        $scope.whoIsLogged = {
+            login: "",
+            type: "" 
+        };
+    };
+
 
 
     $scope.loadBlogs = () => {
@@ -38,7 +91,7 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
                 id: $scope.blogs[index].id,
                 title: $scope.blogs[index].title,
                 text: $scope.blogs[index].text,
-                textWhole: response.data.text
+                textWhole: response.data[0].text
             };
         });   
         $location.path("/blog");
@@ -92,6 +145,40 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
         });
         
     };
+
+    $scope.blogWhole = {};
+    $scope.editingBlogWhole = {};
+    $scope.isEditBlogWhole = false;
+
+    $scope.startEditingBlogWhole = () => {
+        $scope.editingBlogWhole.id = $scope.blogWhole.id;
+        $scope.editingBlogWhole.text = $scope.blogWhole.text;
+        $scope.editingBlogWhole.title = $scope.blogWhole.title;
+        $scope.editingBlogWhole.textWhole = $scope.blogWhole.textWhole;
+        $scope.isEditBlogWhole = true;
+    };
+
+
+    $scope.editBlogWhole = () => {
+        $http.put(`/api/blogWhole`, $scope.editingBlogWhole).then((response) => {
+            $scope.editingBlogWhole = {};
+            $scope.isEditBlogWhole = false;
+
+            $scope.blogWhole.textWhole = response.data.text;
+        });   
+    };
+    
+    $scope.cancelEditingBlogWhole = () => {
+        $scope.editingBlogWhole = {};
+        $scope.isEditBlogWhole = false;
+    };
+
+
+
+
+
+
+
 
     $scope.cancelEditingBlog = () => {
         $scope.editingBlogIndex = -1;
@@ -153,12 +240,15 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
     $scope.sliderNext = () => {
         $('.carousel').carousel('next');
     };
-    
-    $scope.activatedImageIndex = 1;
-    $scope.activeMainImage = (index) => {
-        console.log("neviem");
-        $scope.activatedImageIndex = index;
+
+    $scope.sliderShowPictureOnIndex = (index) => {
+        $('.carousel').carousel(index);
+        console.log(index);
     };
+
+
+    
+
 
     
 });

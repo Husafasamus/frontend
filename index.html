@@ -35,6 +35,20 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#!gallery">Gallery</a>
                 </li>
+
+                <li class="nav-item">
+                  <form ng-if="!whoIsLogged.login">
+                    <input type="text" placeholder="Username"  ng-model="logUser.login" required>
+                    <input type="password" placeholder="Password"  ng-model="logUser.password" required>
+                    <input type="submit" ng-click="loginUser()" value="Login"></input>
+                  </form>            
+                  <span ng-if="whoIsLogged.login" class="nav-link" >{{whoIsLogged.login}}</span>       
+                </li>
+
+                <li ng-if="whoIsLogged.login" class="nav-item">
+                  <button ng-click="logoutUser()" class="btn btn-primary">logout</button>
+                </li> 
+
               </ul>
             </div>
           </nav>
@@ -45,16 +59,7 @@
           <ng-view>
 
 
-          </ng-view>
-
-        
-          
-        
-        
-
-         
-        
-        
+          </ng-view>   
     </div>
 
 

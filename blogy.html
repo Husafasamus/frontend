@@ -5,9 +5,11 @@
             <div ng-if="$index !== editingBlogIndex" class="card-body">
               <h5 class="card-title">{{blog.title}}</h5>
               <p class="card-text">{{blog.text}}</p>
-              <a  ng-click="openBlog($index)" class="btn btn-primary">pozri</a>
-              <a ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
-              <a ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
+
+              <a ng-click="openBlog($index)" class="btn btn-primary">pozri</a>
+              <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
+              <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
+
             </div>
 
             <div ng-if="$index === editingBlogIndex" class="card-body">
@@ -23,11 +25,9 @@
                 </form>                         
             </div>
         </div>
-
-    
     </div>
 
-    <a ng-click="startAddingBlog()" ng-if="!addingBlog" class="btn btn-primary add">Pridaj</a>
+    <a ng-click="startAddingBlog()" ng-if="!addingBlog && whoIsLogged.type === 'admin'" class="btn btn-primary add">Pridaj</a>
     <div class="col" ng-if="addingBlog">
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">                       
