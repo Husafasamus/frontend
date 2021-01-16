@@ -1,14 +1,31 @@
-<div class="container-fluid">
-    <div ng-repeat="blog in blogs track by $index" class="col">
-        <div class="card" style="width: 18rem;">
+
+
+
+
+
+
+
+<div class="container-fluid ">
+    <div class="row">
+    <div ng-repeat="blog in blogs track by $index " class="col">
+        <div class="card " style="width: 18rem;"> 
             <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">
             <div ng-if="$index !== editingBlogIndex" class="card-body">
-              <h5 class="card-title">{{blog.title}}</h5>
-              <p class="card-text">{{blog.text}}</p>
+                <h4 class="card-title">{{blog.title}}</h4>
+                <p class="card-text">{{blog.text}}</p>
 
-              <a ng-click="openBlog($index)" class="btn btn-primary">pozri</a>
-              <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingBlog($index)" class="btn btn-primary">edit</a>
-              <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteBlog($index)" class="btn btn-primary">X</a>
+                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+                                  'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
+                    <a ng-click="openBlog($index)" class="myButton btn btn-outline-dark">pozri</a>
+                </span>
+                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+                                  'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
+                    <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingBlog($index)" class="myButton btn btn-primary">edit</a>
+                </span>
+                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+                                  'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
+                    <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteBlog($index)" class="myButton btn btn-primary">X</a>
+                </span>
 
             </div>
 
@@ -25,9 +42,10 @@
                 </form>                         
             </div>
         </div>
-
+       
  
     </div>
+</div>
 
     <a ng-click="startAddingBlog()" ng-if="!addingBlog && whoIsLogged.type === 'admin'" class="btn btn-primary add">Pridaj</a>
     <div class="col" ng-if="addingBlog">

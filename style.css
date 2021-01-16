@@ -27,8 +27,50 @@
     
 } 
 
-.nav-item {
-    font-size: 20px;
+.nav-item { 
+    font-size: 20px;    
 }
 
- 
+.mycontainer{   
+    margin-top: 90px; 
+}
+
+.myButtonSpanAdmin {
+    float: left;
+    width: 33.33%;   
+    padding-left: 2px;
+    padding-right: 2px;
+    
+}
+.myButton {
+    /* width: calc(100%-2px); */
+   width: 100%; 
+  
+}
+
+.myButtonSpanUser {
+    float: left;
+    width: 100%;   
+}
+
+.card-text {
+    height: 100px;
+    overflow: hidden;
+}
+
+.card-title {
+    overflow: hidden;
+    height:33px;
+}
+
+.cardTitle {
+    height: 33px;
+}
+
+.cardText {
+    height: 33px;
+}
+
+.myWholeBlog {
+    padding: 0px 30px;
+}

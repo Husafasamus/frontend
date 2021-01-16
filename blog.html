@@ -1,25 +1,26 @@
-<button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()" class="btn btn-primary">Edituj článok</button>
 
-<div ng-if="!isEditBlogWhole">
-    <h5 class="card-title">
+<div ng-init="loadBlog()" class="myWholeBlog">
+    <div ng-if="!isEditBlogWhole">
+    <h1 class="">
         {{blogWhole.title}}
-    </h5>                          
-    <p class="blogWhole-text">
+    </h1>                          
+    <p class="">
         {{blogWhole.textWhole}}
     </p>                               
-</div> 
+    </div> 
 
-<form ng-if="isEditBlogWhole">
-    <h5 class="card-title">
-        {{blogWhole.title}}
-    </h5>                          
-    <p class="blogWhole-text">
-        <textarea class="form-control rounded-0" rows="20" ng-model="editingBlogWhole.textWhole" ></textarea>
-    </p>                               
-    <a ng-click="editBlogWhole()" class="btn btn-primary">Uprav</a>
-    <a ng-click="cancelEditingBlogWhole()" class="btn btn-primary">Zrus</a>
-</form>
-
+    <form ng-if="isEditBlogWhole">
+        <h5 class="card-title">
+            {{blogWhole.title}}
+        </h5>                          
+        <p class="blogWhole-text">
+            <textarea class="form-control rounded-0" rows="20" ng-model="editingBlogWhole.textWhole" ></textarea>
+        </p>                               
+        <a ng-click="editBlogWhole()" class="btn btn-primary">Uprav</a>
+        <a ng-click="cancelEditingBlogWhole()" class="btn btn-primary">Zrus</a>
+    </form>
+    <button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()" class="btn btn-primary">Edituj článok</button>
+</div>
 
 
 

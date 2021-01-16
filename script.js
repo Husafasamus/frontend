@@ -1,7 +1,7 @@
 //const angular = require("angular");
 
 var app = angular.module("blog-angular", ["ngRoute"]);
-var controller = app.controller("baseController", ($scope, $http, $timeout, $location)=>{
+var controller = app.controller("baseController", ($scope, $http, $timeout, $location, $routeParams)=>{
 
     $scope.blogs = []; 
     
@@ -23,11 +23,6 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
 
     
 
-    $scope.adminCredentials = {
-        login: "admin",
-        password: "1234"
-    };
-
     $scope.logUser = {
         login: "",
         password: ""
@@ -35,21 +30,34 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
 
     $scope.whoIsLogged = {
         login: "admin",
-        type: "admin" // admin, basic
+        type: "admin" // admin, user
     };
 
 
     $scope.loginUser = () => { 
 
         $scope.whoIsLogged.login = $scope.logUser.login;
-        $scope.whoIsLogged.type = "basic";
+        $scope.whoIsLogged.type = "user";
 
-        if ($scope.logUser.login === $scope.adminCredentials.login && 
-            $scope.logUser.password === $scope.adminCredentials.password) {
-            $scope.whoIsLogged.login = $scope.logUser.login;
-            $scope.whoIsLogged.type = "admin";
+        if ($scope.logUser.login === "admin") {
+            $http.post(`/api/loginUser`, $scope.logUser).then((response) => {
+                          
+                    $scope.whoIsLogged = {
+                        login: "admin",
+                        type: "admin" 
+                    };
+                    $('#loginModal').modal('hide');
+                
+                
+                
+            }).catch(() => {
+                $scope.logoutUser();
+            });
+            
         }
-     
+        
+       
+
         $scope.logUser = {
             login: "",
             password: ""
@@ -65,6 +73,15 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
         //     };
         // }); 
     };
+
+
+    $scope.showLoginModal = () => {
+        $('#loginModal').modal('show');
+    };
+    $scope.hideLoginModal = () => {
+        $('#loginModal').modal('hide');
+    };
+
 
     $scope.logoutUser = () => { 
         $scope.whoIsLogged = {
@@ -85,19 +102,21 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
     }, 0);
 
     $scope.openBlog = (index) => {     
-        $http.get(`/api/blogWhole/${$scope.blogs[index].id}`).then((response) => {
-            $scope.blogWhole = 
-            {
-                id: $scope.blogs[index].id,
-                title: $scope.blogs[index].title,
-                text: $scope.blogs[index].text,
-                textWhole: response.data[0].text
-            };
-        });   
-        $location.path("/blog");
+        $location.path(`/blog/${$scope.blogs[index].id}`);
     };
     
-   
+    $scope.loadBlog = () => {
+        $http.get(`/api/blog/${$routeParams.id}`).then((response) => {
+            $scope.blogWhole = response.data;
+            $http.get(`/api/blogWhole/${$scope.blogWhole.id}`).then((response) => {
+                $scope.blogWhole.textWhole = response.data[0].text;
+            });
+            
+        });
+        
+
+    };
+
     //DELETE////////////////////////////////////////////////////////////////////
     $scope.deleteBlog = (index) => {
         $http.delete(`/api/blog/${$scope.blogs[index].id}`).then((response) => {
@@ -257,7 +276,7 @@ app.config(($routeProvider) => {
     $routeProvider.when("/blogy", {templateUrl: "/blogy.html"})
                   .when("/home", {templateUrl: "/home.html"})
                   .when("/gallery", {templateUrl: "/gallery.html"})
-                  .when("/blog", {templateUrl: "/blog.html"})
+                  .when("/blog/:id", {templateUrl: "/blog.html"})
                   
                   .otherwise({redirectTo: "/"});
 });
