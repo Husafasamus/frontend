@@ -1,144 +1,140 @@
-
 .container div div {
-    border: 1px solid black;
-
+  border: 1px solid black;
 }
 
 .blog-item {
-    width: 300px;
-    height: 300px;
-    
+  width: 300px;
+  height: 300px;
 }
 
 .card {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .add {
-    margin-bottom: 300px;
-    margin-top: 30px;
-
+  margin-bottom: 300px;
+  margin-top: 30px;
 }
 
 .slider {
-    /* width: 50%;
+  /* width: 50%;
     height:50%;
      */
-    
-} 
-
-.nav-item { 
-    font-size: 20px;    
 }
 
-.mycontainer{   
-    margin-top: 90px; 
+.nav-item {
+  font-size: 20px;
+}
+
+.mycontainer {
+  margin-top: 90px;
 }
 
 .myButtonSpanAdmin {
-    float: left;
-    width: 33.33%;   
-    padding-left: 2px;
-    padding-right: 2px;
-    
+  float: left;
+  width: 33.33%;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 .myButton {
-    /* width: calc(100%-2px); */
-   width: 100%; 
-  
+  /* width: calc(100%-2px); */
+  width: 100%;
 }
 
 .myButtonSpanUser {
-    float: left;
-    width: 100%;   
+  float: left;
+  width: 100%;
 }
 
 .card-text {
-    height: 100px;
-     overflow: hidden;
+  height: 100px;
+  overflow: hidden;
 }
 
 .card-title {
-    overflow: hidden;
-    height:66px;
+  overflow: hidden;
+  height: 66px;
 }
 
 .editTextCard {
-    width: 97%; 
-    height: 100%;
+  width: 97%;
+  height: 100%;
 }
 
 .cardTitle {
-    height: 33px;
+  height: 33px;
 }
 
 .cardText {
-    height: 33px;
+  height: 33px;
 }
 
 .myWholeBlog {
-    padding: 0px 30px;
+  padding: 0px 30px;
 }
 
-
-
-  .pozadie-primary {
-      background-color: #17a2b8 !important;
-  }
-
-  .pozadie-secondary  {
-    background-color: #6c757d !important;
+.pozadie-primary {
+  background-color: #17a2b8 !important;
 }
 
-.mytext-primary  {
-    color:  #17a2b8 !important;
-    
+.pozadie-secondary {
+  background-color: #6c757d !important;
+}
+
+.mytext-primary {
+  color: #17a2b8 !important;
 }
 
 .my-nav-div {
-    width: 46px;
+  width: 46px;
 }
 
 .my-button-nav {
-    height: 46px;
-    
+  height: 46px;
 }
 
 .mybutton-fifty {
-  
-    width: 47%;    
-   
+  width: 47%;
 }
 
 .onhoverbutton:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .mybuttonOramovanie {
-    border: 1px solid #17a2b8 !important;
+  border: 1px solid #17a2b8 !important;
 }
 
 .galleryImg {
-    height: 300px !important;
-    width: auto !important;
+  height: 300px !important;
+  width: auto !important;
 }
 
 .myshowpicture {
-    width: 100%;
-    height: 700px;
+  width: 100%;
+  height: 700px;
 }
 
 .showingPicture {
-    width: 100%;
-    height: 700px;
+  width: 100%;
+  height: 700px;
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
-    outline: white;
-    background-color: #17a2b8;
-    background-size: 100%, 100%;
-    border-radius: 50%;
-  
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: white;
+  background-color: #17a2b8;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+}
+
+
+.quote-item {
+    max-width: 600px;
+    height: 60px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
 }

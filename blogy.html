@@ -1,77 +1,76 @@
-
-
-
-
-
-
-
 <div class="container-fluid">
     <div class="row">
-    <div ng-repeat="blog in blogs track by $index" class="col">
-        <div ng-init="hover=false" class="card" ng-class="{'shadow-lg': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" style="width: 18rem;"> 
-            <!-- <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap"> -->
-            <div ng-if="$index !== editingBlogIndex" class="card-body">
-                <h4 class="card-title">{{blog.title}}</h4>
-                <p class="card-text">{{blog.text}}</p>
-
-                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+        <div ng-repeat="blog in blogs track by $index" class="col">
+            <div ng-init="hover=false" class="card" ng-class="{'shadow-lg': hover}" ng-mouseenter="hover = true"
+                ng-mouseleave="hover = false" style="width: 18rem;">
+                <div ng-if="$index !== editingBlogIndex" class="card-body">
+                    <h4 class="card-title">{{blog.title}}</h4>
+                    <p class="card-text">{{blog.text}}</p>
+                    <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
                                   'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
-                                  <!-- myButton btn pozadie-primary -->
-                    <a ng-init="hoverLook = false"  ng-mouseenter="hoverLook = true" ng-mouseleave="hoverLook = false" ng-click="openBlog($index)" 
-                        ng-class="{'myButton btn pozadie-primary text-white': !hoverLook,
+                        <a ng-init="hoverLook = false" ng-mouseenter="hoverLook = true"
+                            ng-mouseleave="hoverLook = false" ng-click="openBlog($index)" ng-class="{'myButton btn pozadie-primary text-white': !hoverLook,
                                    'myButton btn bg-white mytext-primary mybuttonOramovanie': hoverLook }">
-                                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eyeglasses" viewBox="0 0 16 16">
-                                    <path d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-                                  </svg>
-                                </a>
-                </span>
-                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-eyeglasses" viewBox="0 0 16 16">
+                                <path
+                                    d="M4 6a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm2.625.547a3 3 0 0 0-5.584.953H.5a.5.5 0 0 0 0 1h.541A3 3 0 0 0 7 8a1 1 0 0 1 2 0 3 3 0 0 0 5.959.5h.541a.5.5 0 0 0 0-1h-.541a3 3 0 0 0-5.584-.953A1.993 1.993 0 0 0 8 6c-.532 0-1.016.208-1.375.547zM14 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                            </svg>
+                        </a>
+                    </span>
+                    <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
                                   'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
-                    <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingBlog($index)" class="myButton btn btn-warning">Edit</a>
-                </span>
-                <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
+                        <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingBlog($index)"
+                            class="myButton btn btn-warning">Edit</a>
+                    </span>
+                    <span ng-class="{'myButtonSpanAdmin': whoIsLogged.type === 'admin',
                                   'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
-                    <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteBlog($index)" class="myButton btn btn-danger">X</a>
-                </span>
+                        <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteBlog($index)"
+                            class="myButton btn btn-danger">X</a>
+                    </span>
 
+                </div>
+
+
+                <div ng-if="$index === editingBlogIndex" class="card-body">
+                    <form>
+                        <h5 class="card-title">
+                            <input type="text" ng-model="editingBlog.title">
+                        </h5>
+                        <p class="card-text">
+                            <input class=" editTextCard" type="text" maxlength="138" size="138"
+                                ng-model="editingBlog.text">
+                        </p>
+                        <a ng-click="editBlog($index)" class="btn btn-warning mybutton-fifty">Confirm</a>
+                        <a ng-click="cancelEditingBlog()" class="btn btn-danger mybutton-fifty">X</a>
+                    </form>
+                </div>
             </div>
 
 
-            <div ng-if="$index === editingBlogIndex" class="card-body">
-                <form>
-                    <h5 class="card-title">
-                        <input type="text" ng-model="editingBlog.title">
-                    </h5>                          
-                    <p class="card-text">
-                        <input class=" editTextCard" type="text" maxlength="138" size="138" ng-model="editingBlog.text">
-                    </p>                               
-                    <a ng-click="editBlog($index)" class="btn btn-warning mybutton-fifty">Confirm</a>
-                    <a ng-click="cancelEditingBlog()" class="btn btn-danger mybutton-fifty">X</a>
-                </form>                         
-            </div>
         </div>
-       
- 
     </div>
-</div>
 
-    <a ng-click="startAddingBlog()" ng-if="!addingBlog && whoIsLogged.type === 'admin'" class="btn btn-success add">Add</a>
+    <a ng-click="startAddingBlog()" ng-if="!addingBlog && whoIsLogged.type === 'admin'"
+        class="btn btn-success add">Add</a>
     <div class="col" ng-if="addingBlog">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">                       
+            <img class="card-img-top"
+                src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg"
+                alt="Card image cap">
             <div class="card-body">
                 <form>
                     <h5 class="card-title">
                         <input type="text" ng-model="newBlog.title">
-                    </h5>                          
+                    </h5>
                     <p class="card-text">
                         <input type="text" ng-model="newBlog.text">
-                    </p>                               
+                    </p>
                     <a ng-click="addBlog()" class="btn btn-success mybutton-fifty">Add</a>
                     <a ng-click="cancelAddingBlog()" class="btn btn-danger mybutton-fifty">X</a>
-                </form>                         
+                </form>
             </div>
-          </div>
+        </div>
     </div>
 
 </div>

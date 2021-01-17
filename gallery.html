@@ -1,17 +1,20 @@
 <div class="container">
-  <span><h1 class="mytext-primary font-weight-bold text-center">Gallery</h1></span>
+  <span>
+    <h1 class="mytext-primary font-weight-bold text-center">Gallery</h1>
+  </span>
 </div>
 
 <div class="slider">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li ng-repeat="picture in gallery track by $index" data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" ng-class="{active: $index === 0}"></li>
+      <li ng-repeat="picture in gallery track by $index" data-target="#carouselExampleIndicators"
+        data-slide-to="{{$index}}" ng-class="{active: $index === 0}"></li>
     </ol>
     <div class="carousel-inner myshowpicture">
-      <div  ng-repeat="picture in gallery track by $index" class="carousel-item" ng-class="{active: $index === 0}" >          
+      <div ng-repeat="picture in gallery track by $index" class="carousel-item" ng-class="{active: $index === 0}">
         <img class="showingPicture d-block w-100" ng-src="{{picture.src}}" ng-alt="{{picture.title}}">
         <div class="carousel-caption d-none d-md-block">
-            <h5>{{picture.text}}</h5>
+          <h5>{{picture.text}}</h5>
         </div>
       </div>
     </div>
@@ -24,24 +27,19 @@
       <span class="sr-only"></span>
     </a>
   </div>
-
- 
-
-
-
-
 </div>
 
- <!--Grid row-->
- <div class="row">
-
+<!--Grid row-->
+<div class="row">
   <!--Grid column-->
   <div ng-repeat="picture in gallery track by $index" ng-if="$index % 2 === 0" class="col-lg-4 col-md-12 mb-4">
 
-      <img ng-init="hoverImg = false" ng-mouseenter="hoverImg = true" ng-mouseleave="hoverImg = false"  ng-src="{{picture.src}}" ng-click="sliderShowPictureOnIndex($index)" 
-       ng-class="{'img-fluid mb-4 galleryImg rounded': !hoverImg, 
+    <img ng-init="hoverImg = false" ng-mouseenter="hoverImg = true" ng-mouseleave="hoverImg = false"
+      ng-src="{{picture.src}}" ng-click="sliderShowPictureOnIndex($index)" ng-class="{'img-fluid mb-4 galleryImg rounded': !hoverImg, 
                    'img-fluid mb-4 galleryImg shadow-lg rounded': hoverImg}" style="cursor: pointer;" alt="">
-      <img ng-init="hoverImg = false" ng-mouseenter="hoverImg = true" ng-mouseleave="hoverImg = false"  ng-src="{{gallery[$index+1].src}}" ng-if="gallery[$index+1]" ng-click="sliderShowPictureOnIndex($index+1)"   ng-class="{'img-fluid mb-4 galleryImg rounded': !hoverImg, 
+    <img ng-init="hoverImg = false" ng-mouseenter="hoverImg = true" ng-mouseleave="hoverImg = false"
+      ng-src="{{gallery[$index+1].src}}" ng-if="gallery[$index+1]" ng-click="sliderShowPictureOnIndex($index+1)"
+      ng-class="{'img-fluid mb-4 galleryImg rounded': !hoverImg, 
       'img-fluid mb-4 galleryImg shadow-lg rounded': hoverImg}" style="cursor: pointer;" alt="">
-      
-  </div> 
+
+  </div>

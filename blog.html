@@ -1,26 +1,23 @@
-
 <div ng-init="loadBlog()" class="myWholeBlog">
     <div ng-if="!isEditBlogWhole">
-    <h1 class="">
-        {{blogWhole.title}}
-    </h1>                          
-    <p class="">
-        {{blogWhole.textWhole}}
-    </p>                               
-    </div> 
+        <h1 class="">
+            {{blogWhole.title}}
+        </h1>
+        <p class="">
+            {{blogWhole.textWhole}}
+        </p>
+    </div>
 
     <form ng-if="isEditBlogWhole">
         <h5 class="card-title">
             {{blogWhole.title}}
-        </h5>                          
+        </h5>
         <p class="blogWhole-text">
-            <textarea class="form-control rounded-0" rows="20" ng-model="editingBlogWhole.textWhole" ></textarea>
-        </p>                               
+            <textarea class="form-control rounded-0" rows="20" ng-model="editingBlogWhole.textWhole"></textarea>
+        </p>
         <a ng-click="editBlogWhole()" class="btn btn-warning mybutton-fifty">Update</a>
         <a ng-click="cancelEditingBlogWhole()" class="btn btn-danger">X</a>
     </form>
-    <button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()" class="btn btn-warning">Edit</button>
+    <button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()"
+        class="btn btn-warning">Edit</button>
 </div>
-
-
-

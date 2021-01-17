@@ -1,0 +1,20 @@
+<div class="container">
+    <span>
+      <h1 class="mytext-primary font-weight-bold text-center">Quotes</h1>
+    </span>
+  </div>
+
+<!--  -->
+<div class="container-fluid justify-content-center">
+    
+    <div ng-repeat="quote in quotes track by $index" class="row quote-item rounded-2" >
+
+        <span class="card text-center">         
+                <p> {{quote.text}}</p>
+                <p>-{{quote.author}}</p>         
+        </span>
+    
+
+</span>
+
+</div>
