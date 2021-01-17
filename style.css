@@ -55,12 +55,17 @@
 
 .card-text {
     height: 100px;
-    overflow: hidden;
+     overflow: hidden;
 }
 
 .card-title {
     overflow: hidden;
-    height:33px;
+    height:66px;
+}
+
+.editTextCard {
+    width: 97%; 
+    height: 100%;
 }
 
 .cardTitle {
@@ -96,6 +101,7 @@
 
 .my-button-nav {
     height: 46px;
+    
 }
 
 .mybutton-fifty {
@@ -104,3 +110,35 @@
    
 }
 
+.onhoverbutton:hover {
+    text-decoration: underline;
+}
+
+.mybuttonOramovanie {
+    border: 1px solid #17a2b8 !important;
+}
+
+.galleryImg {
+    height: 300px !important;
+    width: auto !important;
+}
+
+.myshowpicture {
+    width: 100%;
+    height: 700px;
+}
+
+.showingPicture {
+    width: 100%;
+    height: 700px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    outline: white;
+    background-color: #17a2b8;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+  
+}

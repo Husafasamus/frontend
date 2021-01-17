@@ -16,10 +16,10 @@
         <p class="blogWhole-text">
             <textarea class="form-control rounded-0" rows="20" ng-model="editingBlogWhole.textWhole" ></textarea>
         </p>                               
-        <a ng-click="editBlogWhole()" class="btn btn-primary">Uprav</a>
-        <a ng-click="cancelEditingBlogWhole()" class="btn btn-primary">Zrus</a>
+        <a ng-click="editBlogWhole()" class="btn btn-warning mybutton-fifty">Update</a>
+        <a ng-click="cancelEditingBlogWhole()" class="btn btn-danger">X</a>
     </form>
-    <button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()" class="btn btn-primary">Edituj článok</button>
+    <button ng-if="whoIsLogged.type === 'admin' && !isEditBlogWhole" ng-click="startEditingBlogWhole()" class="btn btn-warning">Edit</button>
 </div>
 
 

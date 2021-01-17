@@ -209,44 +209,44 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
 
     $scope.gallery = [
         {
-            title: "dog",
-            src: "/gallery/dog.jpg",
-            text: "asdfasf"
+            title: "Elon1",
+            src: "https://upload.wikimedia.org/wikipedia/commons/e/ed/Elon_Musk_Royal_Society.jpg",
+            text: ""
         },
         {
-            title: "cat",
-            src: "./gallery/cat.jpg",
-            text: "keket"
+            title: "Elonn2",
+            src: "https://static.theceomagazine.net/wp-content/uploads/2018/10/15093202/elon-musk.jpg",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(58).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://cdn.vox-cdn.com/thumbor/4QtOwnOxCdwESvt1-CpQSTZvHHA=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19932738/1206292068.jpg.jpg",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(66).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://media.beam.usnews.com/d1/d8/8501ba714a21aed9a7327e02ade1/180515-10thingselonmusk-editorial.jpg",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(74).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://image.cnbcfm.com/api/v1/image/105773439-1551717349171rtx6p9uc.jpg?v=1551717410&w=678&h=381",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(64).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://c.files.bbci.co.uk/11C92/production/_115505827_mediaitem115505311.jpg",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(77).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://specials-images.forbesimg.com/imageserve/5de82785e961e100078f2c1b/960x0.jpg?fit=scale",
+            text: ""
         },
         {
-            title: "cat",
-            src: "http://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(67).jpg",
-            text: "keket"
+            title: "Elon",
+            src: "https://media.wired.com/photos/5b7744715560bb1fedf11c43/1:1/w_1170,h_1170,c_limit/ElonMusk-RTX2J8M%20(1).jpg",
+            text: ""
         },
 
 
