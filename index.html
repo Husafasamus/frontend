@@ -14,6 +14,7 @@
   <script src="./node_modules/jquery/dist/jquery.min.js"></script>
   <script src="./node_modules/angular/angular.min.js"></script>
   <script src="./node_modules/angular-route/angular-route.min.js"></script>
+  <script src="./node_modules/angular-sanitize/angular-sanitize.min.js"></script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="script.js"></script>
 
@@ -21,7 +22,7 @@
 
 
 
-  <div ng-app="blog-angular" ng-init="activeUrl = 'home'" ng-controller="baseController">
+  <div ng-app="blog-angular"  ng-controller="baseController">
 
     <nav
       class="navbar navbar-expand-lg navbar-light pozadie-primary shadow-lg p-3 mb-5 rounded nav-pills nav-justified fixed-top">
@@ -39,8 +40,8 @@
                   }" ng-mouseenter="hoverHome = true" ng-mouseleave="hoverHome = false" href="#!home">Home</a>
             </li>
             <li class="nav-item">
-              <a ng-click="activeUrl = 'blogs'" ng-init="hoverBlogs=false" ng-class="{'nav-link text-uppercase mytext-primary bg-white border-dark rounded': hoverBlogs || activeUrl === 'blogs',
-                  'nav-link  font-weight-bold text-uppercase  text-white': !hoverBlogs  &&  activeUrl !== 'blogs'}"
+              <a ng-click="activeUrl = 'blogy'" ng-init="hoverBlogs=false" ng-class="{'nav-link text-uppercase mytext-primary bg-white border-dark rounded': hoverBlogs || activeUrl === 'blogy',
+                  'nav-link  font-weight-bold text-uppercase  text-white': !hoverBlogs  &&  activeUrl !== 'blogy'}"
                 ng-mouseenter="hoverBlogs = true" ng-mouseleave="hoverBlogs = false" href="#!blogy">Blogs</a>
             </li>
             <li class="nav-item">
@@ -135,6 +136,7 @@
         </div>
       </div>
     </div>
+    
     <div class="container-lg mycontainer shadow-lg p-3 mb-5 bg-white rounded">
       <ng-view></ng-view>
     </div>

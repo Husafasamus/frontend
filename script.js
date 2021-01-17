@@ -1,15 +1,19 @@
 //const angular = require("angular");
 
-var app = angular.module("blog-angular", ["ngRoute"]);
+var app = angular.module("blog-angular", ["ngRoute", "ngSanitize"]);
+
 var controller = app.controller(
   "baseController",
-  ($scope, $http, $timeout, $location, $routeParams) => {
+  ($scope, $http, $timeout, $location, $routeParams, $sanitize) => {
     $scope.blogs = [];
     $scope.quotes = [];
 
     $scope.addingBlog = false;
     $scope.editingBlogIndex = -1;
 
+    $scope.activeUrl = $location.$$path.split("/")[1];  
+    
+    
     $scope.newBlog = {
       title: "",
       text: "",
@@ -19,6 +23,11 @@ var controller = app.controller(
       id: -1,
       title: "",
       text: "",
+    };
+
+    $scope.newQuote = {
+      text: "",
+      author: ""
     };
 
     $scope.logUser = {
@@ -32,9 +41,9 @@ var controller = app.controller(
     };
 
     $scope.loginUser = () => {
-      $scope.whoIsLogged.login = $scope.logUser.login;
-      $scope.whoIsLogged.type = "user";
-
+      
+      $scope.logUser.login = $sanitize($scope.logUser.login);
+      $scope.logUser.password = $sanitize($scope.logUser.password);
       if ($scope.logUser.login === "admin") {
         $http
           .post(`/api/loginUser`, $scope.logUser)
@@ -48,6 +57,10 @@ var controller = app.controller(
           .catch(() => {
             $scope.logoutUser();
           });
+      } else  {
+        $scope.whoIsLogged.login = $scope.logUser.login;
+        $scope.whoIsLogged.type = "user";
+        $("#loginModal").modal("hide");
       }
 
       // $('#loginModal').modal('hide');
@@ -104,6 +117,8 @@ var controller = app.controller(
     };
 
     $scope.loadBlog = () => {
+      $routeParams.id = $sanitize($routeParams.id);
+      $scope.blogWhole.id = $sanitize($scope.blogWhole.id);
       $http.get(`/api/blog/${$routeParams.id}`).then((response) => {
         $scope.blogWhole = response.data;
         $http.get(`/api/blogWhole/${$scope.blogWhole.id}`).then((response) => {
@@ -114,6 +129,7 @@ var controller = app.controller(
 
     //DELETE////////////////////////////////////////////////////////////////////
     $scope.deleteBlog = (index) => {
+      $scope.blogs[index].id = $sanitize($scope.blogs[index].id);
       $http.delete(`/api/blog/${$scope.blogs[index].id}`).then((response) => {
         $scope.blogs.splice(index, 1);
       });
@@ -124,13 +140,27 @@ var controller = app.controller(
       $scope.addingBlog = true;
     };
 
+    $scope.startAddingQuote = () => {
+      $scope.addingQuote = true;
+    };
+
     $scope.cancelAddingBlog = () => {
       $scope.addingBlog = false;
       $scope.newBlog.title = "";
       $scope.newBlog.text = "";
     };
 
+    $scope.cancelAddingQuote = () => {
+      $scope.addingQuote = false;
+      $scope.newQuote.text = "";
+      $scope.newQuote.author = "";
+    };
+
     $scope.addBlog = () => {
+
+      $scope.newBlog.title = $sanitize($scope.newBlog.title);
+      $scope.newBlog.text = $sanitize($scope.newBlog.text);
+
       $http.post(`/api/blog`, $scope.newBlog).then((response) => {
         $scope.blogs.push(response.data);
         $scope.newBlog.title = "";
@@ -139,6 +169,23 @@ var controller = app.controller(
       });
     };
 
+    // dorobit
+    $scope.addQuote = () => {
+
+      $scope.newQuote.text = $sanitize($scope.newQuote.text);
+      $scope.newQuote.author = $sanitize($scope.newQuote.author);
+
+      $http.post(`/api/quote`, $scope.newQuote).then((response) => {
+        $scope.blogs.push(response.data);
+        $scope.newQuote.text = "";
+        $scope.newQuote.author = "";
+        $scope.addingQuote = false;
+      });
+    };
+
+
+
+
     $scope.startEditingBlog = (index) => {
       $scope.editingBlogIndex = index;
       $scope.editingBlog.id = $scope.blogs[index].id;
@@ -146,6 +193,10 @@ var controller = app.controller(
       $scope.editingBlog.text = $scope.blogs[index].text;
     };
     $scope.editBlog = (index) => {
+
+      $scope.editingBlog.title = $sanitize($scope.editingBlog.title);
+      $scope.editingBlog.text = $sanitize($scope.editingBlog.text);
+
       $http.put(`/api/blog`, $scope.editingBlog).then((response) => {
         $scope.blogs[index].title = $scope.editingBlog.title;
         $scope.blogs[index].text = $scope.editingBlog.text;
@@ -166,6 +217,12 @@ var controller = app.controller(
     };
 
     $scope.editBlogWhole = () => {
+
+      $scope.editingBlogWhole.id = $sanitize($scope.blogWhole.id);
+      $scope.editingBlogWhole.text = $sanitize($scope.blogWhole.text);
+      $scope.editingBlogWhole.title = $sanitize($scope.blogWhole.title);
+      $scope.editingBlogWhole.textWhole = $sanitize($scope.blogWhole.textWhole);
+
       $http.put(`/api/blogWhole`, $scope.editingBlogWhole).then((response) => {
         $scope.editingBlogWhole = {};
         $scope.isEditBlogWhole = false;
@@ -255,11 +312,12 @@ var controller = app.controller(
 
 app.config(($routeProvider) => {
   $routeProvider
+  
     .when("/blogy", { templateUrl: "/blogy.html" })
     .when("/home", { templateUrl: "/home.html" })
     .when("/gallery", { templateUrl: "/gallery.html" })
     .when("/blog/:id", { templateUrl: "/blog.html" })
     .when("/quotes", { templateUrl: "/quotes.html" })
 
-    .otherwise({ redirectTo: "/" });
+    .otherwise({ redirectTo: "/home" });
 });
