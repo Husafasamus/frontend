@@ -7,7 +7,7 @@
       <li ng-repeat="picture in gallery track by $index" data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" ng-class="{active: $index === 0}"></li>
     </ol>
     <div class="carousel-inner">
-      <div  ng-repeat="picture in gallery track by $index" class="carousel-item" ng-class="{active: $index === 0}" >          
+      <div  ng-repeat="picture in gallery track by $index" class="carousel-item " ng-class="{active: $index === 0}" >          
         <img class="d-block w-100" ng-src="{{picture.src}}" ng-alt="{{picture.title}}">
         <div class="carousel-caption d-none d-md-block">
             <h5>{{picture.text}}</h5>

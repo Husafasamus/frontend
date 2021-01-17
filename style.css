@@ -74,3 +74,18 @@
 .myWholeBlog {
     padding: 0px 30px;
 }
+
+
+
+  .pozadie-primary {
+      background-color: #17a2b8;
+  }
+
+  .pozadie-secondary  {
+    background-color: #6c757d !important;
+}
+
+.mytext-primary  {
+    color:  #17a2b8 !important;
+    
+}
