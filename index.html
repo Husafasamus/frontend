@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lukáš Sokol</title>
     <link rel="stylesheet" href="style.css">
+    <!-- <link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet"> -->
     <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="demo_icon.gif" type="image/gif" sizes="16x16">
 </head>
@@ -19,7 +20,7 @@
 
 
 
-    <div ng-app="blog-angular" ng-controller="baseController">        
+    <div ng-app="blog-angular" ng-init="activeUrl = 'home'" ng-controller="baseController">        
       
         <nav class="navbar navbar-expand-lg navbar-light pozadie-primary shadow-lg p-3 mb-5 rounded nav-pills nav-justified fixed-top">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,28 +31,56 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link  font-weight-bold text-uppercase  text-white" href="#!home">Home</a>
+                  <a ng-click="activeUrl = 'home'" ng-init="hoverHome=false" ng-class="{'nav-link text-uppercase mytext-primary bg-white border-dark rounded': activeUrl === 'home' || hoverHome,
+                  'nav-link  font-weight-bold text-uppercase  text-white': !hoverHome &&  activeUrl !== 'home'
+                  }" ng-mouseenter="hoverHome = true" ng-mouseleave="hoverHome = false" href="#!home">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-uppercase text-white rounded " href="#!blogy">Blogy</a>
+                  <a ng-click="activeUrl = 'blogs'" ng-init="hoverBlogs=false" ng-class="{'nav-link text-uppercase mytext-primary bg-white border-dark rounded': hoverBlogs || activeUrl === 'blogs',
+                  'nav-link  font-weight-bold text-uppercase  text-white': !hoverBlogs  &&  activeUrl !== 'blogs'}" ng-mouseenter="hoverBlogs = true" ng-mouseleave="hoverBlogs = false" href="#!blogy">Blogs</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-uppercase mytext-primary bg-white border-dark rounded  active " href="#!gallery">Gallery</a>
+                  <a ng-click="activeUrl = 'gallery'" ng-init="hover=false" ng-class="{'nav-link text-uppercase mytext-primary bg-white border-dark rounded': hover  || activeUrl === 'gallery',
+                                                       'nav-link  font-weight-bold text-uppercase  text-white': !hover  &&  activeUrl !== 'gallery'}" ng-mouseenter="hover = true" ng-mouseleave="hover = false"  href="#!gallery">
+                                                       Gallery
+                  </a>
                 </li>
 
-
+                <!--EXAMPLE  <a class="nav-link text-uppercase mytext-primary bg-white border-dark rounded  active " href="#!gallery">Gallery</a>  -->
+                <!--         <div ng-init="hover=false" class="card" ng-class="{'shadow-lg': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" style="width: 18rem;"> 
+ -->
               </ul>
             </div>
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+            <div class="collapse navbar-collapse justify-content-end my-nav-div" id="navbarTogglerDemo03">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <button ng-if="!whoIsLogged.login" class="btn bg-white mytext-primary shadow-sm rounded" ng-click="showLoginModal()">Login/Register</button>           
-                  <span ng-if="whoIsLogged.login" class="nav-link" >{{whoIsLogged.login}}</span>       
+                    <button ng-if="!whoIsLogged.login" class="btn bg-white mytext-primary shadow-sm rounded my-button-nav" ng-click="showLoginModal()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                        <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                      </svg>
+                      Login/Register
+                    </button>    
+                        
+                  <span ng-if="whoIsLogged.login" class="nav-link text-white" >   
+                    {{whoIsLogged.login}}
+                  </span>       
                 </li>
 
                 <li ng-if="whoIsLogged.login" class="nav-item">
-                  <button ng-click="logoutUser()" class="btn bg-white mytext-primary shadow-sm rounded">logout</button>
+                  <!-- Logout -->
+                  <button ng-init="hoverLogout = false" ng-mouseenter="hoverLogout = true" ng-mouseleave="hoverLogout = false" ng-click="logoutUser()" type="button" class="btn bg-white mytext-primary shadow-sm rounded my-button-nav " 
+                  ng-class="{'btn bg-white mytext-primary shadow-sm rounded my-button-nav': !hoverLogout,
+                             'btn bg-danger text-white shadow-sm rounded my-button-nav': hoverLogout
+                             }
+                  ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right " viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                    </svg>
+                    
+                  </button>
                 </li> 
               </ul>
             </div>
@@ -62,22 +91,33 @@
           </nav>
         
         
-          <!-- Modal -->
+          <!-- Modal Login/Register-->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Prihlásenie</h5>
-       
+        <div class="container" >
+        <h4 class="modal-title mytext-primary text-center" id="loginModalLabel">
+          <span>Login</span>
+        </h4>
       </div>
-      <div class="modal-body">
-        <input type="text" placeholder="Username"  ng-model="logUser.login" required>
-        <input type="password" placeholder="Password"  ng-model="logUser.password" required>
       </div>
-      <div class="modal-footer">
-        <button type="button" ng-click="hideLoginModal()" class="btn btn-secondary">Close</button>
-        <button ng-click="loginUser()" type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-body">     
+       <form class="form-sign">
+        <label class="sr-only">Username</label>
+        <input type="text" ng-model="logUser.login" class="form-control" placeholder="eg. lukas" required autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input ng-model="logUser.password" type="password" id="inputPassword" class="form-control" placeholder="********" required>      
+        <!-- <input type="text" placeholder="Username"  ng-model="logUser.login" required> -->
+        <!-- <input type="password" placeholder="Password"  ng-model="logUser.password" required> -->
       </div>
+      <div class="modal-footer justify-content-center">
+        <!-- <a ng-click="hideLoginModal()" class="myButton btn btn-primary mybutton-fifty">X</a>
+        <a ng-click="loginUser()" class="btn myButton pozadie-primary text-white mybutton-fifty">X</a> -->
+        <button type="button" ng-click="hideLoginModal()" class="btn btn-danger mybutton-fifty">Close</button>
+        <button ng-click="loginUser()" type="submit" class="btn pozadie-primary text-white mybutton-fifty">Login</button>   
+      </div>
+    </form>
     </div>
   </div>
 </div>
@@ -88,11 +128,6 @@
                
     </div>
 
-
-<!-- Button trigger modal
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-  Launch demo modal
-</button> -->
 
 
 

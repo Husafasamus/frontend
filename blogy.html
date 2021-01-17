@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="row">
     <div ng-repeat="blog in blogs track by $index" class="col">
-        <div class="card " style="width: 18rem;"> 
+        <div ng-init="hover=false" class="card" ng-class="{'shadow-lg': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" style="width: 18rem;"> 
             <img class="card-img-top" src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg" alt="Card image cap">
             <div ng-if="$index !== editingBlogIndex" class="card-body">
                 <h4 class="card-title">{{blog.title}}</h4>

@@ -78,7 +78,7 @@
 
 
   .pozadie-primary {
-      background-color: #17a2b8;
+      background-color: #17a2b8 !important;
   }
 
   .pozadie-secondary  {
@@ -89,3 +89,18 @@
     color:  #17a2b8 !important;
     
 }
+
+.my-nav-div {
+    width: 46px;
+}
+
+.my-button-nav {
+    height: 46px;
+}
+
+.mybutton-fifty {
+  
+    width: 47%;    
+   
+}
+

@@ -56,7 +56,7 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
             
         }
         
-       
+        // $('#loginModal').modal('hide');
 
         $scope.logUser = {
             login: "",
@@ -64,7 +64,7 @@ var controller = app.controller("baseController", ($scope, $http, $timeout, $loc
         };
 
 
-        console.log($scope.whoIsLogged);
+        // console.log($scope.whoIsLogged);
         // console.log($scope.logUser);
         // $http.post(`/api/loginUser/`, $scope.logUser).then((response) => {
         //     $scope.logUser = {
