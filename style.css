@@ -16,11 +16,7 @@
   margin-top: 30px;
 }
 
-.slider {
-  /* width: 50%;
-    height:50%;
-     */
-}
+
 
 .nav-item {
   font-size: 20px;
@@ -36,6 +32,16 @@
   padding-left: 2px;
   padding-right: 2px;
 }
+
+.myButtonSpanAdminQuote {
+  float: left; 
+  width: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+
+
 .myButton {
   /* width: calc(100%-2px); */
   width: 100%;
@@ -131,15 +137,44 @@
 }
 
 
-.quote-item {
+/* .quote-item {
     max-width: 600px;
     height: 60px;
     margin-top: 40px;
     margin-bottom: 30px;
    
     
-}
+} */
 
 .mojkontajner {
   align-content: center;
+}
+
+.karta {
+    margin: -20px auto -20px auto;
+    min-width: 250px;
+    
+}
+
+.stred {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.quote-text {
+    height: 50px;
+}
+
+.textarea {
+  margin-bottom: 10px;
+}
+
+.btn-warning {
+  color: white !important;
+}
+
+.poslednyQuote {
+    margin-bottom: 30px;
 }

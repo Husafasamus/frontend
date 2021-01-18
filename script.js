@@ -11,6 +11,9 @@ var controller = app.controller(
     $scope.addingBlog = false;
     $scope.editingBlogIndex = -1;
 
+    $scope.addingQuote = false;
+    $scope.editingQuoteIndex = -1;
+
     $scope.activeUrl = $location.$$path.split("/")[1];  
     
     
@@ -23,6 +26,12 @@ var controller = app.controller(
       id: -1,
       title: "",
       text: "",
+    };
+    
+    $scope.editingQuote = {
+      id: -1,
+      text: "",
+      author: "",
     };
 
     $scope.newQuote = {
@@ -134,6 +143,13 @@ var controller = app.controller(
         $scope.blogs.splice(index, 1);
       });
     };
+
+    $scope.deleteQuote = (index) => {
+      $scope.quotes[index].id = $sanitize($scope.quotes[index].id);
+      $http.delete(`/api/quote/${$scope.quotes[index].id}`).then((response) => {
+        $scope.quotes.splice(index, 1);
+      });
+    };
     ////////////////////////////////////////////////////////////////////////////
 
     $scope.startAddingBlog = () => {
@@ -169,21 +185,38 @@ var controller = app.controller(
       });
     };
 
-    // dorobit
+
     $scope.addQuote = () => {
 
       $scope.newQuote.text = $sanitize($scope.newQuote.text);
       $scope.newQuote.author = $sanitize($scope.newQuote.author);
 
       $http.post(`/api/quote`, $scope.newQuote).then((response) => {
-        $scope.blogs.push(response.data);
+        $scope.quotes.push(response.data);
         $scope.newQuote.text = "";
         $scope.newQuote.author = "";
         $scope.addingQuote = false;
       });
     };
 
+    $scope.startEditingQuote = (index) => {
+      $scope.editingQuoteIndex = index;
+      $scope.editingQuote.id = $scope.quotes[index].id;
+      $scope.editingQuote.text = $scope.quotes[index].text;
+      $scope.editingQuote.author = $scope.quotes[index].author;
+    };
 
+    $scope.editQuote = (index) => {
+
+      $scope.editingQuote.text = $sanitize($scope.editingQuote.text);
+      $scope.editingQuote.author = $sanitize($scope.editingQuote.author);
+
+      $http.put(`/api/quote`, $scope.editingQuote).then((response) => {
+        $scope.quotes[index].text = $scope.editingQuote.text; 
+        $scope.quotes[index].author = $scope.editingQuote.author;
+        $scope.editingQuoteIndex = -1;
+      });
+    };
 
 
     $scope.startEditingBlog = (index) => {
@@ -192,6 +225,7 @@ var controller = app.controller(
       $scope.editingBlog.title = $scope.blogs[index].title;
       $scope.editingBlog.text = $scope.blogs[index].text;
     };
+
     $scope.editBlog = (index) => {
 
       $scope.editingBlog.title = $sanitize($scope.editingBlog.title);
@@ -240,6 +274,12 @@ var controller = app.controller(
       $scope.editingBlogIndex = -1;
       $scope.editingBlog.title = "";
       $scope.editingBlog.text = "";
+    };
+
+    $scope.cancelEditingQuote = () => {
+      $scope.editingQuoteIndex = -1;
+      $scope.editingQuote.title = "";
+      $scope.editingQuote.text = "";
     };
 
     //gallery
