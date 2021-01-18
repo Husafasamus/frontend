@@ -178,3 +178,12 @@
 .poslednyQuote {
     margin-bottom: 30px;
 }
+
+.homepicture {
+    max-width: 950px;
+    height: auto;
+    margin-bottom: 30px;
+}
+.kartaHome {
+    margin-top: -40px !important;
+}

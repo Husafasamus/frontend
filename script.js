@@ -49,6 +49,8 @@ var controller = app.controller(
       type: "admin", // admin, user
     };
 
+    $scope.lastAddedQuote = 0;
+
     $scope.loginUser = () => {
       
       $scope.logUser.login = $sanitize($scope.logUser.login);
@@ -72,21 +74,12 @@ var controller = app.controller(
         $("#loginModal").modal("hide");
       }
 
-      // $('#loginModal').modal('hide');
-
       $scope.logUser = {
         login: "",
         password: "",
       };
 
-      // console.log($scope.whoIsLogged);
-      // console.log($scope.logUser);
-      // $http.post(`/api/loginUser/`, $scope.logUser).then((response) => {
-      //     $scope.logUser = {
-      //         login: "",
-      //         password: ""
-      //     };
-      // });
+
     };
 
     $scope.showLoginModal = () => {
@@ -119,7 +112,16 @@ var controller = app.controller(
     $timeout(() => {
       $scope.loadBlogs();
       $scope.loadQuotes();
+      $scope.randomImgIndex();
+      
     }, 0);
+
+    
+
+     $scope.randomQuote = 1;
+    // $scope.randomQuoteGen = () => {
+    //     $scope.randomQuote = Math.floor(Math.random()*$scope.quotes.length);
+    // };
 
     $scope.openBlog = (index) => {
       $location.path(`/blog/${$scope.blogs[index].id}`);
@@ -252,10 +254,10 @@ var controller = app.controller(
 
     $scope.editBlogWhole = () => {
 
-      $scope.editingBlogWhole.id = $sanitize($scope.blogWhole.id);
-      $scope.editingBlogWhole.text = $sanitize($scope.blogWhole.text);
-      $scope.editingBlogWhole.title = $sanitize($scope.blogWhole.title);
-      $scope.editingBlogWhole.textWhole = $sanitize($scope.blogWhole.textWhole);
+      $scope.editingBlogWhole.id = $sanitize($scope.editingBlogWhole.id);
+      $scope.editingBlogWhole.text = $sanitize($scope.editingBlogWhole.text);
+      $scope.editingBlogWhole.title = $sanitize($scope.editingBlogWhole.title);
+      $scope.editingBlogWhole.textWhole = $sanitize($scope.editingBlogWhole.textWhole);
 
       $http.put(`/api/blogWhole`, $scope.editingBlogWhole).then((response) => {
         $scope.editingBlogWhole = {};
@@ -288,7 +290,7 @@ var controller = app.controller(
       {
         title: "Elon1",
         src:
-          "https://upload.wikimedia.org/wikipedia/commons/e/ed/Elon_Musk_Royal_Society.jpg",
+          "https://static.theceomagazine.net/wp-content/uploads/2018/10/15093202/elon-musk.jpg",
         text: "",
       },
       {
@@ -335,6 +337,11 @@ var controller = app.controller(
       },
     ];
 
+    $scope.randomImg = 0;
+    $scope.randomImgIndex = () => {
+        $scope.randomImg = Math.floor(Math.random()*$scope.gallery.length);
+    };
+
     $scope.sliderPrev = () => {
       $(".carousel").carousel("prev");
     };
@@ -345,7 +352,6 @@ var controller = app.controller(
 
     $scope.sliderShowPictureOnIndex = (index) => {
       $(".carousel").carousel(index);
-      console.log(index);
     };
   }
 );

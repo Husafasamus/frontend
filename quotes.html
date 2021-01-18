@@ -1,84 +1,75 @@
 <div class="container">
-    <span>
-      <h1 class="mytext-primary font-weight-bold text-center">Quotes</h1>
-    </span>
-  </div>
+  <span>
+    <h1 class="mytext-primary font-weight-bold text-center">Quotes</h1>
+  </span>
+</div>
 
-  <div class="row" ng-repeat="quote in quotes track by $index">
-    <div ng-class="{'col-sm-12 text-center w-50 karta poslednyQuote':  $index === quotes.length -1 , 
+<div class="row" ng-repeat="quote in quotes track by $index">
+  <div
+    ng-class="{'col-sm-12 text-center w-50 karta poslednyQuote':  $index === quotes.length -1 , 
                                                               'col-sm-12 text-center w-50 karta ':  $index !== quotes.length -1}">
-      <div class="card pozadie-primary shadow-lg">
-        <div class="card-body" ng-if="$index !== editingQuoteIndex">
-        
-          <p class="text-white">{{quote.text}}</p>
-          <p class="text-white">-{{quote.author}}</p>
-        
-          <!-- <h5 class="card-title text-white">Special title treatment</h5> -->
-          <!-- <p class="card-text text-white">With supporting text below as a natural lead-in to additional content.</p> -->
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-        
-          <div class="container " ng-if="whoIsLogged.type === 'admin'">
-            <span ng-class="{'myButtonSpanAdminQuote': whoIsLogged.type === 'admin',
+    <div class="card pozadie-primary shadow-lg">
+      <div class="card-body" ng-if="$index !== editingQuoteIndex">
+
+        <p class="text-white">{{quote.text}}</p>
+        <p class="text-white">-{{quote.author}}</p>
+
+        <div class="container " ng-if="whoIsLogged.type === 'admin'">
+          <span ng-class="{'myButtonSpanAdminQuote': whoIsLogged.type === 'admin',
                                              'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
-              <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingQuote($index)"
-                class="myButton btn btn-warning">Edit</a>
-            </span>
-            <span ng-class="{'myButtonSpanAdminQuote': whoIsLogged.type === 'admin',
+            <a ng-if="whoIsLogged.type === 'admin'" ng-click="startEditingQuote($index)"
+              class="myButton btn btn-warning">Edit</a>
+          </span>
+          <span ng-class="{'myButtonSpanAdminQuote': whoIsLogged.type === 'admin',
                                              'myButtonSpanUser': whoIsLogged.type !== 'admin' }">
-              <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteQuote($index)" class="myButton btn btn-danger">X</a>
-            </span>
-          </div>
-        
-          
-        
+            <a ng-if="whoIsLogged.type === 'admin'" ng-click="deleteQuote($index)" class="myButton btn btn-danger">X</a>
+          </span>
         </div>
 
-        <div class="card-body" ng-if="$index === editingQuoteIndex">
+      </div>
+
+      <div class="card-body" ng-if="$index === editingQuoteIndex">
+
+        <div class="form-group text-white">
+          <label for="quotetextArea">Quote text</label>
+          <textarea ng-model="editingQuote.text" class="form-control " id="quotetextArea" rows="3"></textarea>
+          <label for="quoteAuthor">Author</label>
+          <input ng-model="editingQuote.author" class="form-control form-control-sm textarea" id="quoteAuthor"
+            type="text" placeholder="Author">
+        </div>
+
+
+        <a ng-click="editQuote($index)" class="btn btn-warning mybutton-fifty text-white">Edit</a>
+        <a ng-click="cancelEditingQuote()" class="btn btn-danger mybutton-fifty">X</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Adding quote  -->
+<a ng-click="startAddingQuote()" ng-if="!addingQuote && whoIsLogged.type === 'admin'"
+  class="btn btn-success add stred">Add</a>
+<div>
+
+  <div ng-if="addingQuote" class="row">
+    <div class="col-sm-12 w-50 karta textarea">
+      <div class="card pozadie-primary shadow-lg">
+        <div class="card-body">
 
           <div class="form-group text-white">
             <label for="quotetextArea">Quote text</label>
-            <textarea ng-model="editingQuote.text" class="form-control " id="quotetextArea" rows="3"></textarea>
+            <textarea ng-model="newQuote.text" class="form-control " id="quotetextArea" rows="3"></textarea>
             <label for="quoteAuthor">Author</label>
-            <input ng-model="editingQuote.author" class="form-control form-control-sm textarea" id="quoteAuthor" type="text"
+            <input ng-model="newQuote.author" class="form-control form-control-sm textarea" id="quoteAuthor" type="text"
               placeholder="Author">
           </div>
-      
-      
-          <a ng-click="editQuote($index)" class="btn btn-warning mybutton-fifty text-white">Edit</a>
-          <a ng-click="cancelEditingQuote()" class="btn btn-danger mybutton-fifty">X</a>
-      
-        </div>
-        </div>
-    </div>
-  </div>
 
+          <a ng-click="addQuote()" class="btn btn-success mybutton-fifty">Add</a>
+          <a ng-click="cancelAddingQuote()" class="btn btn-danger mybutton-fifty">X</a>
 
-                                           <!-- Adding quote  -->
-    <a ng-click="startAddingQuote()" ng-if="!addingQuote && whoIsLogged.type === 'admin'"
-      class="btn btn-success add stred">Add</a>
-    <div>
-    
-      <div ng-if="addingQuote" class="row">
-        <div class="col-sm-12 w-50 karta textarea">
-          <div class="card pozadie-primary shadow-lg">
-            <div class="card-body">
-    
-              <!-- <p class="">
-                <input value="text" type="text" ng-model="newBlog.text">
-              </p> -->
-              <div class="form-group text-white">
-                <label  for="quotetextArea">Quote text</label>
-                <textarea ng-model="newQuote.text" class="form-control " id="quotetextArea" rows="3"></textarea>
-                <label  for="quoteAuthor">Author</label>
-                <input ng-model="newQuote.author" class="form-control form-control-sm textarea" id="quoteAuthor" type="text" placeholder="Author">
-              </div>
-
-
-              <a ng-click="addQuote()" class="btn btn-success mybutton-fifty">Add</a>
-              <a ng-click="cancelAddingQuote()" class="btn btn-danger mybutton-fifty">X</a>
-
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+  </div>
 </div>
